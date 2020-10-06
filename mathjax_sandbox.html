@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<title>Mathjax Sandbox</title>
+<script>
+MathJax = {
+  tex:{
+     inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+  },
+  chtml: {
+    matchFontHeight: false,
+    displayAlign: 'left',
+    displayIndent: '3em',
+  }
+};
+</script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<div class="container">
+<h1>Mathjax Sandbox</h1>
+<p>
+\begin{equation*}
+x+1\over\sqrt{1-x^2}
+x_1, x_2
+\end{equation*}
+\begin{align}
+a&=b\label{ref3}\cr
+&c+d
+\end{align}
+100\$
+$\Sigma, \ne, \neg, \le, \ge$
+</p>
+<p>
+aaa \(1+1=2\).
+</p>
+<p>
+Inline, \(2+2\).
+</p>
+<p>
+Another \[3+x = 3+x\]
+</p>
+<hr>
+<nav class="mb-3"><a href="index.html">Home</a> &gt; Mathjax Sandbox</nav>
+</div>
+</body>
+</html>
