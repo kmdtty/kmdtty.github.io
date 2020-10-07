@@ -4,11 +4,47 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="kmdtty.css">
 <title>Symbolic Execution</title>
+<script src="kmdtty_mathjax_setting.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
 </head>
 <body>
 <div class="container">
 <h1>Notes on Symbolic Execution</h1>
+<p>
+<b>Symbolic Execution</b> is a technique to verify computer programms.
+Let me start to talk about a small example to explain what is Symbolic Execution.
+</p>
+<pre>
+int foo(int x, int y) {
+    int t = 0;
+    if x &gt; y {
+        t = x;
+    } else {
+        t = y;
+    }
+    assert(t &lt; x);
+    return t;
+}
+</pre>
+<p>
+This C function foo() checks $t < x$, before returing the value t, but how we assure if it is True? 
+</p>
+<p>
+One way is a test. Call foo() with some test values,
+</p>
+<dl>
+<dt>x = 3, y = 4</dt> <dd>foo(3, 4)</dd>
+<dt>x = 0, y = 0</dt> <dd>foo(0, 0)</dd>
+<dt>x = -2147483648, y = -2147483648</dt><dd>foo(-2147483648, -2147483648)</dd>
+<dt>x = -2147483648, y = -2147483648</dt><dd>foo(-2147483648, -2147483648)</dd>
+<dt>...</dt><dd></dd>
+</dl>
+<p>
+However,..
+</p>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Symbolic Execution</nav>
 </div>
