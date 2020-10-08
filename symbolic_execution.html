@@ -39,11 +39,47 @@ One way is a test. Call foo() with some test values,
 <dt>x = 3, y = 4</dt> <dd>foo(3, 4)</dd>
 <dt>x = 0, y = 0</dt> <dd>foo(0, 0)</dd>
 <dt>x = -2147483648, y = -2147483648</dt><dd>foo(-2147483648, -2147483648)</dd>
-<dt>x = -2147483648, y = -2147483648</dt><dd>foo(-2147483648, -2147483648)</dd>
+<dt>x = -2147483648, y = 2147483648</dt><dd>foo(-2147483648, 2147483648)</dd>
 <dt>...</dt><dd></dd>
 </dl>
 <p>
-However,..
+However, the range of C int is $[-2147483648, 2147483648]$, so if we test all the cases, it becomes $(2147483648 \times 2) \times (2147483648 \times 2)$ cases.
+</p>
+<p>
+To deal with this issue, we introduce abstract variable $X, Y$ instead of tesiting concrete int values for x and y.
+</p>
+<p>
+Here, let $X,Y$ be the given variable of x, y respectively. Then,
+</p>
+<pre>
+if x > y {
+  t = x; 
+} else {
+  t = y;
+}
+</pre>
+<p>
+This C code can be expressed as the following logical expression with the abstract variable $X,Y$.
+</p>
+<p>
+$(t = X \wedge X > Y) \vee (t = Y \wedge \neg (X > Y))$
+</p>
+<!--
+<p>
+\[
+t =
+ \begin{cases}
+  X & (X>Y) \\
+  Y & (\text{otherwise})
+ \end{cases}
+\]
+</p>
+-->
+<p>
+Then, asking $t < x$ becomes the following Logical expression.
+</p>
+<p>
+$t < X \wedge [(t = X \wedge X > Y) \vee (t = Y \wedge \neg (X > Y))].$
 </p>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Symbolic Execution</nav>
