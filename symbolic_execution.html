@@ -42,10 +42,13 @@ One way is a test. Call foo() with some test values,
 <dt>x = -2147483648, y = 2147483648</dt><dd>foo(-2147483648, 2147483648)</dd>
 <dt>...</dt><dd></dd>
 </dl>
+>
+(single test does not tells other test values behaivier so..)
+</p>
 <p>
 However, the range of C int is $[-2147483648, 2147483648]$, so if we test all the cases, it becomes $(2147483648 \times 2) \times (2147483648 \times 2)$ cases.
 </p>
-<p>
+<p<p>
 To deal with this issue, we introduce abstract variable $X, Y$ instead of tesiting concrete int values for x and y.
 </p>
 <p>
@@ -80,6 +83,9 @@ Then, asking $t < x$ becomes the following Logical expression.
 </p>
 <p>
 $t < X \wedge [(t = X \wedge X > Y) \vee (t = Y \wedge \neg (X > Y))].$
+</p>
+<p>
+(This symbolic version express infinitely(?) many inputs (what happened if given value is overflow against C int?)))
 </p>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Symbolic Execution</nav>
