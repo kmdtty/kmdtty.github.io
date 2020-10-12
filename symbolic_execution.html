@@ -13,6 +13,7 @@
 <body>
 <div class="container">
 <h1>Notes on Symbolic Execution</h1>
+<h2>Introduction</h2>
 <p>
 <b>Symbolic Execution</b> is a technique to verify computer programms.
 Let me start to talk about a small example to explain what is Symbolic Execution.
@@ -30,23 +31,23 @@ int foo(int x, int y) {
 }
 </pre>
 <p>
-This C function foo() checks $t < x$, before returing the value t, but how we assure if it is True? 
+This C function foo() checks $t < x$ before returing the value t, but how we assure if it is True? 
 </p>
 <p>
 One way is a test. Call foo() with some test values,
 </p>
 <dl>
-<dt>x = 3, y = 4</dt> <dd>foo(3, 4)</dd>
+<dt>x = 3, y = 4</dt> <dd>$=$ foo(3, 4) $\Rightarrow$ t = y = 4 $\Rightarrow t < x = \text{False}$</dd>
+<!--
 <dt>x = 0, y = 0</dt> <dd>foo(0, 0)</dd>
 <dt>x = -2147483648, y = -2147483648</dt><dd>foo(-2147483648, -2147483648)</dd>
 <dt>x = -2147483648, y = 2147483648</dt><dd>foo(-2147483648, 2147483648)</dd>
+-->
 <dt>...</dt><dd></dd>
 </dl>
->
-(single test does not tells other test values behaivier so..)
-</p>
 <p>
-However, the range of C int is $[-2147483648, 2147483648]$, so if we test all the cases, it becomes $(2147483648 \times 2) \times (2147483648 \times 2)$ cases.
+However this single test result does not tells other test values behaivier, and
+the range of C int is $[-2147483648, 2147483648]$, so if we test all the int ranges, it becomes $(2147483648 \times 2) \times (2147483648 \times 2)$ cases.
 </p>
 <p<p>
 To deal with this issue, we introduce abstract variable $X, Y$ instead of tesiting concrete int values for x and y.
@@ -65,7 +66,7 @@ if x > y {
 This C code can be expressed as the following logical expression with the abstract variable $X,Y$.
 </p>
 <p>
-$(t = X \wedge X > Y) \vee (t = Y \wedge \neg (X > Y))$
+$(X > Y \implies t = X) \wedge (\neg (X > Y) \implies t = Y)$
 </p>
 <!--
 <p>
@@ -79,14 +80,29 @@ t =
 </p>
 -->
 <p>
-Then, asking $t < x$ becomes the following Logical expression.
+Then, asking $t < x$ becomes evaluating the following Logical expression.
 </p>
 <p>
-$t < X \wedge [(t = X \wedge X > Y) \vee (t = Y \wedge \neg (X > Y))].$
+$(X > Y \implies t = X) \wedge (\neg (X > Y) \implies t = Y) \wedge t < X$
 </p>
 <p>
-(This symbolic version express infinitely(?) many inputs (what happened if given value is overflow against C int?)))
+(XXX: do we need to introduce a variable for $t$? where the line of assertion)
 </p>
+<p>
+This symbolic formula allows arbitary many imputs for the variable $X,Y$, and tells how is the relationship among $x, y$ and $t$.
+</p>
+<p>
+Here, we have to questsions to run Symblic Eecution:
+</p>
+<ul>
+<li>How to construct the logical expression</li>
+<li>How to solve or answer the logical question in a mechanical way</li>
+</ul>
+<p>
+In the next section, we would like to address about it.
+</p>
+
+<h2>How to run Symbolic Execution</h2>
 <h2>References</h2>
 <ol>
 <li>King, J. C. Symbolic execution and program testing. Commun. ACM 19, 385–394 (1976)</li>
