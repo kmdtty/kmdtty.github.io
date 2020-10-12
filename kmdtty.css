@@ -1,1 +1,24 @@
 div.container {max-width: 700px;}
+.theorem,  .definition {
+  display: block;
+  font-family: serif;
+  border: solid 1px #000;
+  padding: 10px;
+  margin: 20px;
+}
+.theorem:before {
+  content: "Theorem. ";
+  font-weight: bold;
+  font-style: normal;
+}
+.theorem[text]:before {
+ content: "Theorem (" attr(text) ") ";
+}
+.definition:before {
+  content: "Definition. ";
+  font-weight: bold;
+  font-style: normal;
+}
+.definition[text]:before {
+ content: "Definition. (" attr(text) ") ";
+}
