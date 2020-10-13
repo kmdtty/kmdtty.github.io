@@ -106,7 +106,24 @@ In the next section, we would like to address about it.
 <div class="definition" text="Symbolic execution">
 TBA
 </div>
-
+<blockquote>
+That is, each symbolic execution result may be quivalent to a large number of normal test cases. These results can be checked agains the programmer's expectations for correctness either formally or informally.
+</blockquote>
+<blockquote>
+The class of inputs characterized by each symbolic execution is determined by the dependence of the program's control flow on its inputs. If the control flow of the program is completely independent of the input variables, a single symbolic execution will suffice to check all possible executions of the program. If the control flow of the program is dependent on the inputs, one must resort to a case analysis. 
+</blockquote>
+<blockquote>
+Often the set of input classes needed to exhaust all possible case is practically infinite, so this is still basically a testing methodology. However, the input classes are determined only by those inputs involved in the control flow, and symbolic testing promises to provide better results more easily than normal testing for most programs.
+</blockquote>
+<p>
+(TODO: Define language, define evaluation rule for $+,-,\times$ over integers that accepts abstract variables)
+</p>
+<p>
+(TODO: Define path condition (pc) of IF statements. <b>pc</b> is a boolean expression over the symbolic inputs $\{\alpha_i\}$. $R \geq 0$ or $\neg(R \geq 0)$ where $R$ is a polynomial over $\{\alpha_i\}$. Each symbolic execution begins with pc initialized to true.
+</p>
+<blockquote>
+... each time a new input value for the program is required, it is supplied symbolically from the list of symbols [$\alpha_1, \alpha_2, \alpha_3, ...$].
+</blockquote>
 <h2>References</h2>
 <ol>
 <li>King, J. C. Symbolic execution and program testing. Commun. ACM 19, 385–394 (1976)</li>
