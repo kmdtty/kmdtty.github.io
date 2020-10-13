@@ -1,0 +1,42 @@
+<html>
+<head>
+</head>
+<body>
+<h1 id="cats">Cats</h1>
+<script>
+(function(document) {
+  'use strict';
+  var cat_array = [{name: "Nyan", image:"cat.jpg"},
+                  {name: "Mya", image:"cat2.jpg"}];
+
+  var currentElement = document.getElementById('cats');
+
+  function insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+  }
+
+  function addCat(cat_name, img_src) {
+    var h2_title = document.createElement('h2');
+    h2_title.textContent = cat_name;
+    var cat_img = document.createElement('img');
+    var counter = document.createElement('div');
+    counter.textContent = 0;
+    var count = 0;
+    cat_img.src = img_src;
+    cat_img.addEventListener('click', function() {
+      count = count + 1;
+      counter.textContent = count;
+    }, false);
+    insertAfter(h2_title, currentElement);
+    insertAfter(cat_img, h2_title);
+    insertAfter(counter, cat_img);
+    currentElement = counter;
+  }
+
+  cat_array.map(function(cat_dict) {
+      addCat(cat_dict['name'], cat_dict['image']);
+  });
+})(document);
+</script>
+</body>
+</html>
