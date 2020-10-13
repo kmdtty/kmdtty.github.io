@@ -4,6 +4,12 @@
 </head>
 <body>
 <h1 id="cats">Cat Clicker</h1>
+<hr>
+<small><pre>
+This is a toy application from Udacity MOOC ''JavaScript Design Patterns''.
+
+https://www.udacity.com/course/javascript-design-patterns--ud989
+</pre>
 <script>
 (function(document) {
   'use strict';
@@ -20,7 +26,7 @@
     var h2_title = document.createElement('h2');
     h2_title.textContent = cat_name;
     var cat_img = document.createElement('img');
-    var counter = document.createElement('div');
+    var counter = document.createElement('h3');
     counter.textContent = 0;
     var count = 0;
     cat_img.src = img_src;
@@ -39,5 +45,6 @@
   });
 })(document);
 </script>
+</small>
 </body>
 </html>
