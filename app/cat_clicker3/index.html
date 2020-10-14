@@ -1,0 +1,80 @@
+<html>
+<head>
+<title>Cat Clicker ver.3</title>
+</head>
+<body>
+<h1 id="cats">Cat Clicker ver.3</h1>
+<select id="cat_select">
+</select>
+<hr>
+<small><pre>
+This is a toy application from Udacity MOOC ''JavaScript Design Patterns''.
+
+https://www.udacity.com/course/javascript-design-patterns--ud989
+</pre>
+<script>
+(function(document) {
+  'use strict';
+  var cat_array = [{name: "Nyan", image:"cat.jpg"},
+                  {name: "Mya", image:"cat2.jpg"}];
+
+  var currentElement = document.getElementById('cat_select');
+
+  function insertAfter(newNode, existingNode) {
+    existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+  }
+
+  function addSelection() {
+    var cat_select = document.getElementById('cat_select');
+    cat_array.map(function(cat_dict) {
+       var option  = document.createElement('option');
+       option.text = cat_dict['name'];
+       option.value = cat_dict['name']
+       cat_select.add(option);
+    });
+    cat_select.addEventListener('change', function() {
+       console.log('selected:' + this.value);
+       if (document.getElementById(this.value) == null) {
+         addCat(this.value, "cat.jpg", this.value);
+       }
+       document.getElementById(this.value).style.display  ="block";
+       if (this.value == "Nyan") {
+         var t = document.getElementById("Mya");
+         if (t != null) {
+           t.style.display = "none";
+         }
+       } else {
+         var t2 = document.getElementById("Nyan");
+         if (t2 != null) {
+           t2.style.display = "none";
+         }
+       }
+    });
+
+  }
+  function addCat(cat_name, img_src, cat_id) {
+    var cat_div = document.createElement('div')
+    var h2_title = document.createElement('h2');
+    h2_title.textContent = cat_name;
+    var cat_img = document.createElement('img');
+    var counter = document.createElement('h3');
+    counter.textContent = 0;
+    var count = 0;
+    cat_div.id = cat_id
+    cat_img.src = img_src;
+    cat_img.addEventListener('click', function() {
+      count = count + 1;
+      counter.textContent = count;
+    }, false);
+    cat_div.appendChild(h2_title);
+    cat_div.appendChild(cat_img);
+    cat_div.appendChild(counter);
+    insertAfter(cat_div, currentElement);
+    currentElement = cat_div;
+  }
+  addSelection();
+})(document);
+</script>
+</small>
+</body>
+</html>
