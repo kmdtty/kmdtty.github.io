@@ -124,6 +124,45 @@ Often the set of input classes needed to exhaust all possible case is practicall
 <blockquote>
 ... each time a new input value for the program is required, it is supplied symbolically from the list of symbols [$\alpha_1, \alpha_2, \alpha_3, ...$].
 </blockquote>
+<p>
+Prerequirement: define a subset of C language that only have $+,-,\times$ over 32bit C int values, and predicates $ =, !=, &gt;=, &gt;, &lt;=, &lt; $ and assignments to a C variables.
+</p>
+<p>
+(a symbolic execution for a C function:
+</p>
+<div>
+<pre>
+while (line in souce code) {
+  if line is a IF statement:
+    condition = evaluate(IF statement)
+    if condition == True:
+        continue
+    else if IF has no ELSE or ELSE:
+        PC = PC /\ condition
+    else if IF has ELSE or ELSE IF:
+        # branching
+        PC_{i+1} = dup(PC)
+        PC_{i+1} = PC_{i+1} /\ condition
+  else if line is an assignment:
+    update_environment(evaluate(line))
+  else:
+    skip
+}
+</pre>
+<p>
+Now that you have PC.
+</p>
+<ol>
+<li>Create symbolic variables for the given parameters of function
+<li>If, 'if' statement found evaluate the conditional statement
+<li>If the conditional statement is 'true' then, go ahead to the next line
+<li>Else if the conditional statement is not 'true', store the condition to PC(path condition)
+
+</ol>
+</div>
+<div>
+)
+</div>
 <h2>References</h2>
 <ol>
 <li>King, J. C. Symbolic execution and program testing. Commun. ACM 19, 385–394 (1976)</li>
