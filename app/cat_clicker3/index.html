@@ -4,6 +4,9 @@
 </head>
 <body>
 <h1 id="cats">Cat Clicker ver.3</h1>
+<p>
+Here are 6 groups of cats, please select and click it.
+</p>
 <select id="cat_select">
 </select>
 <hr>
@@ -16,12 +19,27 @@ https://www.udacity.com/course/javascript-design-patterns--ud989
 (function(document) {
   'use strict';
   var cat_array = [{name: "Nyan", image:"cat.jpg"},
-                  {name: "Mya", image:"cat2.jpg"}];
+                  {name: "Mya", image:"cat2.jpg"},
+                  {name: "NyanNyan", image:"cat3.jpg"},
+                  {name: "Mia", image:"cat4.jpg"},
+                  {name: "NyanNyanNyan", image:"cat5.jpg"},
+                  {name: "Nyaaaa", image:"cat6.jpg"},
+                  ];
 
   var currentElement = document.getElementById('cat_select');
 
   function insertAfter(newNode, existingNode) {
     existingNode.parentNode.insertBefore(newNode, existingNode.nextSibling);
+  }
+
+  function findCat(cat_name) {
+      var found_cat = cat_array.filter(function(cat_dict) {
+          if (cat_dict['name'] == cat_name) {
+              return cat_dict
+          }
+      });
+      console.log(found_cat);
+      return found_cat[0];
   }
 
   function addSelection() {
@@ -33,22 +51,22 @@ https://www.udacity.com/course/javascript-design-patterns--ud989
        cat_select.add(option);
     });
     cat_select.addEventListener('change', function() {
-       console.log('selected:' + this.value);
-       if (document.getElementById(this.value) == null) {
-         addCat(this.value, "cat.jpg", this.value);
+       var selected_value = this.value
+       console.log('selected:' + selected_value);
+       if (document.getElementById(selected_value) == null) {
+          var cat = findCat(selected_value);
+          console.log(cat['image']);
+          addCat(cat['name'], cat['image'], this.value);
        }
-       document.getElementById(this.value).style.display  ="block";
-       if (this.value == "Nyan") {
-         var t = document.getElementById("Mya");
-         if (t != null) {
-           t.style.display = "none";
+       document.getElementById(selected_value).style.display  = "block";
+       cat_array.map(function(cat_dict) {
+         if (cat_dict['name'] != selected_value) {
+           var unselected = document.getElementById(cat_dict['name']);
+           if (unselected !== null) {
+               unselected.style.display  = "none";
+           }
          }
-       } else {
-         var t2 = document.getElementById("Nyan");
-         if (t2 != null) {
-           t2.style.display = "none";
-         }
-       }
+       });
     });
 
   }
@@ -73,6 +91,12 @@ https://www.udacity.com/course/javascript-design-patterns--ud989
     currentElement = cat_div;
   }
   addSelection();
+  addCat(cat_array[0].name, cat_array[0].image, cat_array[0].name);
+  /*
+  document.addEventListener('DOMContentLoaded', function() {
+    currentElement.selectedIndex = 1; 
+  }, false);
+  */
 })(document);
 </script>
 </small>
