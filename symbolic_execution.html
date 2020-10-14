@@ -150,18 +150,24 @@ while (line in souce code) {
 }
 </pre>
 <p>
-Now that you have PC.
+Now that you have Path Condition (PC).
 </p>
+<p>
+(What is symbolic execution tree? Why is it needed?)
+</p>
+<blockquote>
 <ol>
-<li>Create symbolic variables for the given parameters of function
-<li>If, 'if' statement found evaluate the conditional statement
-<li>If the conditional statement is 'true' then, go ahead to the next line
-<li>Else if the conditional statement is not 'true', store the condition to PC(path condition)
-
+<li>For each terminal leaf in the tree (corresponding to a completed execution path) there does exist a particular nonsymbolic input to the program which, when executed in the normal fashion, will trace the same path (list of stetements executed). This is equivalent to saying that <i>pc</i> never becomes identically <i>fales</i>.
+<li><i>pc</i>'s associated with any two terminal leves are distinct (ie. $\neg (pc_1 \wedge pc_2)$). The two paths from the common root of the execution tree leading to any two leaves have a unique forking node where the two paths diverge. At that forking node some <i>q</i> was added to one <i>pc</i>  while $\neg q$ was added to the other. Since neither <i>pc</i> becomes incosistent (false) they must maintain this difference.
 </ol>
-</div>
-<div>
-)
+</blockquote>
+<p>
+To define execution tree, need statement number, node, transition and arc, variable values?, statement counter?)
+</p>
+<ul>
+<li>To determin what PCs are needed to check?</li>
+<li>Determin all PCs are not equivalent with checking terminating node?</li>
+</ul>
 </div>
 <h2>References</h2>
 <ol>
