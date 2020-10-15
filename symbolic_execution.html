@@ -158,11 +158,18 @@ Now that you have Path Condition (PC).
 <p>
 My understanding of this stetement:
 <ol>
-<li> There must be a concrete values that lead to the terminate node (PC).
-<li> The evaluation of terminate nodes are exclusive. (This can be proved by the construction of PCs. PC is either $pc_{i+1} = pc_i \wedge r$ or $pc_{i+2} = pc_i \wedge \neg r$.)
+<li> There must be a concrete values that lead to the terminate node (PC). (This can be proved by how construct the PCs. PCs are added when branched this is when the both conditions are not false, so the conditions are not false and is a predicate $R$ on polynomials over integer, or $\neg R$. Both can be assigned a concrete integer)
+<li> The logical expression of terminate nodes are unique. (This can be proved by how to construct the PCs. PC is either $pc_{i+1} = pc_i \wedge r$ or $pc_{i+2} = pc_i \wedge \neg r$.)
 </ol>
 </p>
-<p>(I feel 1) and 2) are saying the same thing..?)</p>
+<p>(I feel 1) and 2) are saying the same thing..?, No. We can think the both a) unique and unreachable, b) reachable and duplicated tree) </p>
+<p>Again, why is symbolic tree needed?</p>
+<ul>
+<li>From the property 1) We can test the concrete input values (If the condition is not satisfiable, computing assignment is useless)
+<li>From the property 1) We can eliminate useless testing (If it is not reachable, computing assignment is useless).
+<li>From the property 2) We can eliminate duplicated logical expressions.
+<li>We can imediately test PCs when the node is terminated, no need to wait untile all PCs are calculated.
+</ul>
 <p>Quotes from King (1976).</p>
 <blockquote>
 <ol>
