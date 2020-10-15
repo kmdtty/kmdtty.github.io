@@ -57,7 +57,7 @@ Here, let $X,Y$ be the given variable of x, y respectively. Then,
 </p>
 <pre>
 if x > y {
-  t = x; 
+  t = x;
 } else {
   t = y;
 }
@@ -155,6 +155,15 @@ Now that you have Path Condition (PC).
 <p>
 (What is symbolic execution tree? Why is it needed?)
 </p>
+<p>
+My understanding of this stetement:
+<ol>
+<li> There must be a concrete values that lead to the terminate node (PC).
+<li> The evaluation of terminate nodes are exclusive. (This can be proved by the construction of PCs. PC is either $pc_{i+1} = pc_i \wedge r$ or $pc_{i+2} = pc_i \wedge \neg r$.)
+</ol>
+</p>
+<p>(I feel 1) and 2) are saying the same thing..?)</p>
+<p>Quotes from King (1976).</p>
 <blockquote>
 <ol>
 <li>For each terminal leaf in the tree (corresponding to a completed execution path) there does exist a particular nonsymbolic input to the program which, when executed in the normal fashion, will trace the same path (list of stetements executed). This is equivalent to saying that <i>pc</i> never becomes identically <i>fales</i>.
