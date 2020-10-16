@@ -106,31 +106,18 @@ In the next section, we would like to address about it.
 <div class="definition" text="Symbolic execution">
 TBA
 </div>
-<blockquote>
-That is, each symbolic execution result may be quivalent to a large number of normal test cases. These results can be checked agains the programmer's expectations for correctness either formally or informally.
-</blockquote>
-<blockquote>
-The class of inputs characterized by each symbolic execution is determined by the dependence of the program's control flow on its inputs. If the control flow of the program is completely independent of the input variables, a single symbolic execution will suffice to check all possible executions of the program. If the control flow of the program is dependent on the inputs, one must resort to a case analysis. 
-</blockquote>
-<blockquote>
-Often the set of input classes needed to exhaust all possible case is practically infinite, so this is still basically a testing methodology. However, the input classes are determined only by those inputs involved in the control flow, and symbolic testing promises to provide better results more easily than normal testing for most programs.
-</blockquote>
 <p>
 (TODO: Define language, define evaluation rule for $+,-,\times$ over integers that accepts abstract variables)
 </p>
 <p>
 (TODO: Define path condition (pc) of IF statements. <b>pc</b> is a boolean expression over the symbolic inputs $\{\alpha_i\}$. $R \geq 0$ or $\neg(R \geq 0)$ where $R$ is a polynomial over $\{\alpha_i\}$. Each symbolic execution begins with pc initialized to true.
 </p>
-<blockquote>
-... each time a new input value for the program is required, it is supplied symbolically from the list of symbols [$\alpha_1, \alpha_2, \alpha_3, ...$].
-</blockquote>
 <p>
 Prerequirement: define a subset of C language that only have $+,-,\times$ over 32bit C int values, and predicates $ =, !=, &gt;=, &gt;, &lt;=, &lt; $ and assignments to a C variables.
 </p>
-<p>
-(a symbolic execution for a C function:
-</p>
-<div>
+<h3>
+symbolic execution  algorithm for a C function:
+</h3>
 <pre>
 while (line in souce code) {
   if line is a IF statement:
@@ -149,14 +136,58 @@ while (line in souce code) {
     skip
 }
 </pre>
+<h2>Symbolic Execution Tree</h2>
 <p>
-Now that you have Path Condition (PC).
+What is symbolic execution tree?
 </p>
 <p>
-(What is symbolic execution tree? Why is it needed?)
+To define execution tree, need:
 </p>
+<ul>
+<li>statement number $\implies$ node
+<li>statement transition $implies$ transition
+<li>concrete values
+<li>symbolic values
+<li>environment
+</ul>
 <p>
-My understanding of this stetement:
+In Automaton: $(S, s_0, P)$  state $S$, initial state $s_0$, transition set $P$.
+</p>
+<h3>Symbolic Execution Tree alogorithm</h3>
+<pre>
+state_list = [s_0]
+transition_dict = {}
+environment = {}
+while (line in soource code) {
+  previous_state = last_state(state_list)
+  current_state = line_number(line)
+  state_list.add(current_state)
+  if line is a IF statement:
+    condition = evaluate(IF statement)
+    if condition == True:
+       transition_dict[previous_state].append(current_state)
+       continue
+    else if IF has no ELSE or ELSE:
+        PC = PC /\ condition
+        # do we need to add state here?
+        new_state = newState(state_list)
+        new_state.path_condtion = PC
+        transtion_dict[previous_state].append(new_state)
+    else if IF has ELSE or ELSE IF:
+        # branching
+        PC_{i+1} = dup(PC)
+        PC_{i+1} = PC_{i+1} /\ condition
+        new_state = newState(state_list)
+        new_state.path_condition = PC_{i+1}
+        transtion_dict[previous_state].append(new_state)
+  else if line is an assignment:
+    environment = update_environment(evaluate(line))
+  else:
+    skip
+}
+</pre>
+<p>
+We have these propperties in symbolic execution tree:
 <ol>
 <li> There must be a concrete values that lead to the terminate node (PC). (This can be proved by how construct the PCs. PCs are added when branched this is when the both conditions are not false, so the conditions are not false and is a predicate $R$ on polynomials over integer, or $\neg R$. Both can be assigned a concrete integer)
 <li> The logical expression of terminate nodes are unique. (This can be proved by how to construct the PCs. PC is either $pc_{i+1} = pc_i \wedge r$ or $pc_{i+2} = pc_i \wedge \neg r$.)
@@ -170,21 +201,7 @@ My understanding of this stetement:
 <li>From the property 2) We can eliminate duplicated logical expressions.
 <li>We can imediately test PCs when the node is terminated, no need to wait untile all PCs are calculated.
 </ul>
-<p>Quotes from King (1976).</p>
-<blockquote>
-<ol>
-<li>For each terminal leaf in the tree (corresponding to a completed execution path) there does exist a particular nonsymbolic input to the program which, when executed in the normal fashion, will trace the same path (list of stetements executed). This is equivalent to saying that <i>pc</i> never becomes identically <i>fales</i>.
-<li><i>pc</i>'s associated with any two terminal leves are distinct (ie. $\neg (pc_1 \wedge pc_2)$). The two paths from the common root of the execution tree leading to any two leaves have a unique forking node where the two paths diverge. At that forking node some <i>q</i> was added to one <i>pc</i>  while $\neg q$ was added to the other. Since neither <i>pc</i> becomes incosistent (false) they must maintain this difference.
-</ol>
-</blockquote>
 <p>
-To define execution tree, need statement number, node, transition and arc, variable values?, statement counter?)
-</p>
-<ul>
-<li>To determin what PCs are needed to check?</li>
-<li>Determin all PCs are not equivalent with checking terminating node?</li>
-</ul>
-</div>
 <h2>References</h2>
 <ol>
 <li>King, J. C. Symbolic execution and program testing. Commun. ACM 19, 385–394 (1976)</li>
