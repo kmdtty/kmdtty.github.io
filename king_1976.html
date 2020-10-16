@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="kmdtty.css">
+<title>Quotes from King (1976) Symbolic Execution</title>
+<script src="kmdtty_mathjax_setting.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
+</head>
+<body>
+<div class="container">
+<p>Quotes from King (1976) Symbolic execution and program testing.</p>
+<h1></h1>
+<h2>Symbolic Execution</h2>
+<blockquote>
+That is, each symbolic execution result may be quivalent to a large number of normal test cases. These results can be checked agains the programmer's expectations for correctness either formally or informally.
+</blockquote>
+<blockquote>
+The class of inputs characterized by each symbolic execution is determined by the dependence of the program's control flow on its inputs. If the control flow of the program is completely independent of the input variables, a single symbolic execution will suffice to check all possible executions of the program. If the control flow of the program is dependent on the inputs, one must resort to a case analysis. 
+</blockquote>
+<blockquote>
+Often the set of input classes needed to exhaust all possible case is practically infinite, so this is still basically a testing methodology. However, the input classes are determined only by those inputs involved in the control flow, and symbolic testing promises to provide better results more easily than normal testing for most programs.
+</blockquote>
+<blockquote>
+... each time a new input value for the program is required, it is supplied symbolically from the list of symbols [$\alpha_1, \alpha_2, \alpha_3, ...$].
+</blockquote>
+<h2>Symbolic Execution Tree</h2>
+<blockquote>
+<ol>
+<li>For each terminal leaf in the tree (corresponding to a completed execution path) there does exist a particular nonsymbolic input to the program which, when executed in the normal fashion, will trace the same path (list of stetements executed). This is equivalent to saying that <i>pc</i> never becomes identically <i>fales</i>.
+<li><i>pc</i>'s associated with any two terminal leves are distinct (ie. $\neg (pc_1 \wedge pc_2)$). The two paths from the common root of the execution tree leading to any two leaves have a unique forking node where the two paths diverge. At that forking node some <i>q</i> was added to one <i>pc</i>  while $\neg q$ was added to the other. Since neither <i>pc</i> becomes incosistent (false) they must maintain this difference.
+</ol>
+</blockquote>
+<h2>References</h2>
+<ol>
+<li>King, J. C. Symbolic execution and program testing. Commun. ACM 19, 385–394 (1976)</li>
+</ol>
+</div>
+</body>
+</html>
