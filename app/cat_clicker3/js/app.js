@@ -67,7 +67,9 @@
       },
       render: function(cat) {
         var htmlStr = '';
-        htmlStr += '<img src="'+ cat.image + '" id="cat_image"/><h3>' + cat.counter + '</h3>';
+        htmlStr += '<h2>' + cat.name + '</h2>'
+        htmlStr += '<img src="'+ cat.image + '" id="cat_image"/>' 
+        htmlStr += '<h3><font color="red">' + cat.counter + '</font> clicks</h3>';
         this.cat_display.innerHTML = htmlStr;
         var cat_image = document.getElementById("cat_image");
         cat_image.addEventListener('click', function() {
