@@ -22,3 +22,20 @@ div.container {max-width: 700px;}
 .definition[text]:before {
  content: "Definition. (" attr(text) ") ";
 }
+blockquote {
+    padding: 6px 16px;
+    border: none;
+    font-size: medium;
+    font-family: Lobster;
+    quotes: "\201C" "\201D";
+    display: inline-block;
+    position: relative;
+}
+blockquote:before { 
+    content: open-quote;
+    font-weight: bold;
+} 
+blockquote:after { 
+    content: close-quote;
+    font-weight: bold;
+}
