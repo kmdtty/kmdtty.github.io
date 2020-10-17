@@ -130,7 +130,11 @@
               var cat = octopus.getCurrentCat();
               cat.name = admin_view.admin_cat_name.value;
               cat.image = admin_view.admin_cat_image_url.value;
-              cat.counter = admin_view.admin_cat_click_counter.value;
+              var counter = parseInt(admin_view.admin_cat_click_counter.value);
+              if (isNaN(counter)) {
+                  counter = 0;
+              }
+              cat.counter = counter;
               octopus.updateCat(cat);
               octopus.setCurrentCat(cat);
               selection_view.render();
