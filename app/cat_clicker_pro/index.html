@@ -1,0 +1,45 @@
+<html>
+<head>
+<title>Cat Clicker Pro</title>
+<link rel="stylesheet" href="css/cat_clicker.css">
+</head>
+<body>
+<h1 id="cats">Cat Clicker <sup>pro</sup></h1>
+<p>
+Here are 6 groups of cats, select and click as you like.
+</p>
+<select id="cat_select"></select>
+<div id="cat_display"></div>
+<input type="button" value="Admin Mode (edit)" id="admin_button"/>
+<input type="button" value="Reset (dangerous!)" id="reset_button"/>
+<div id="admin_area">
+<form class="form-table">
+<div class="form-row">
+ <label for="admin_cat_name">Cat Name</label>
+ <input type="text" id="admin_cat_name"/>
+</div>
+<div class="form-row">
+ <label for="admin_cat_image_url">Cat Image URL</label>
+ <input type="text" id="admin_cat_image_url"/>
+</div>
+<div class="form-row">
+ <label for="admin_cat_click_counter">Number of Clicks</label>
+ <input type="text" id="admin_cat_click_counter"/>
+</div>
+<div class="form-row">
+<input type="button" value="Cancel Admin Mode" id="cancel_button"/>
+<input type="button" value="Save" id="save_button"/>
+</div>
+</form>
+</div>
+<hr>
+<small><pre>
+This is a toy application from Udacity MOOC &ldquo;JavaScript Design Patterns&rdquo;.
+
+https://www.udacity.com/course/javascript-design-patterns--ud989
+</pre>
+<script src="js/app.js">
+</script>
+</small>
+</body>
+</html>
