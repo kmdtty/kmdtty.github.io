@@ -15,19 +15,34 @@
 <h1>Notes on Hoare Logic</h1>
 <h2>1. Introduction</h2>
 <p>
-Hoare Logic is a logic for progamming languages. It is a logic to verify how programs are calculating. It is a logic to express what those programs are doing. 
+Hoare Logic is a logic for progamming languages. It is a logic to verify how programs are calculating. It is a logic to express what those programs are doing. It is a logic to prove programs.
 </p>
 <p>
 For example, we can imagine a C program which adding two integers.
 </p>
 <pre class="code">
 int add(int x, int y) {
-    return x + y;
+    int z = x + y;
+    return z;
 }
 </pre>
 <p>
-Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$. 
+Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$.
 </p>
+<p>
+To verify, express, prove the program, Hoare Logic introduce Hoare triple, axioms and the rules.
+</p>
+<div class="definition" text="Hoare Triple">
+Hoare triple is a (P, S, Q) that is denoted:
+\[\{P\}\, S\, \{Q\}\]
+where $P$ is the precondition that is true before $S$ is executed, $S$ is a subset of program list, Q is the postcondition that is true after the $S$ are executed.
+</div>
+<p>For example,</p>
+<pre class="code">
+{x + y = x + y}
+int z = x + y;
+{z = x +y}
+</pre>
 <h2>References</h2>
 <ol>
 <li>Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)
