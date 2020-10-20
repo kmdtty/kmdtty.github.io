@@ -14,8 +14,23 @@
 <div class="container">
 <h1>Notes on Hoare Logic</h1>
 <h2>1. Introduction</h2>
+<p>
+Hoare Logic is a logic for progamming languages. It is a logic to verify how programs are calculating. It is a logic to express what those programs are doing. 
+</p>
+<p>
+For example, we can imagine a C program which adding two integers.
+</p>
+<pre class="code">
+int add(int x, int y) {
+    return x + y;
+}
+</pre>
+<p>
+Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$. 
+</p>
 <h2>References</h2>
 <ol>
+<li>Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)
 </ol>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Hoare Logic</nav>

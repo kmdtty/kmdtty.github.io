@@ -18,7 +18,7 @@
 <b>Symbolic Execution</b> is a technique to verify computer programms.
 Let me start to talk about a small example to explain what is Symbolic Execution.
 </p>
-<pre>
+<pre class="code">
 int foo(int x, int y) {
     int t = 0;
     if x &gt; y {
@@ -55,7 +55,7 @@ To deal with this issue, we introduce abstract variable $X, Y$ instead of tesiti
 <p>
 Here, let $X,Y$ be the given variable of x, y respectively. Then,
 </p>
-<pre>
+<pre class="code">
 if x > y {
   t = x;
 } else {
@@ -115,10 +115,7 @@ TBA
 <p>
 Prerequirement: define a subset of C language that only have $+,-,\times$ over 32bit C int values, and predicates $ =, !=, &gt;=, &gt;, &lt;=, &lt; $ and assignments to a C variables.
 </p>
-<h3>
-symbolic execution  algorithm for a C function:
-</h3>
-<pre>
+<pre class="algorithm" text="Symbolic Execution">
 while (line in souce code) {
   if line is a IF statement:
     condition = evaluate(IF statement)
@@ -154,7 +151,7 @@ To define execution tree, need:
 In Automaton: $(S, s_0, P)$  state $S$, initial state $s_0$, transition set $P$.
 </p>
 <h3>Symbolic Execution Tree alogorithm</h3>
-<pre>
+<pre class="algorithm" text="Symbolic Execution Tree">
 state_list = [s_0]
 transition_dict = {}
 environment = {}
