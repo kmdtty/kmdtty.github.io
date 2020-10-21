@@ -40,9 +40,9 @@ where $P$ is the precondition that is true before $S$ is executed, $S$ is a subs
 </div>
 <p>For example,</p>
 <p>$\{x + y \Leftrightarrow 4\}$</p>
-<pre class="code">
+<p>
 z = x + y;
-</pre>
+</p>
 <p>$\{z \Leftrightarrow 4\}$</p>
 <p>
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
@@ -52,11 +52,30 @@ What we want to do with Hoare Toriple is to prove $Q$ from the $P$ and $S$. To d
 </p>
 <div class="definition" text="Axiom of Assignment">
 \begin{equation}
-Q[x|f]\,\,\text{{x = f}}\,\, Q
+\{Q[\text{f/x}]\}\,\,\text{x = f}\,\, \{Q\}
 \end{equation}
+where <b>x</b> is a variable of a program, <b>f</b> is a expression of a program, and $Q[\text{f/x}]$ denotes a replacement all occurense of <b>f</b> in $Q$ with <b>x</b> .
 </div>
 <p>
+Having Axiom of Assignment, now we can prove the following Hoare Triple.</p>
+<p>\begin{equation*}
+\{x + y \Leftrightarrow 4\} \,
+\text{z = x + y;} \,
+\{z \Leftrightarrow 4\}
+\end{equation*}
+</p>
+<p>
+$z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$ by Axiom of Assignment, then we immediately get $ x + y \Leftrightarrow 4$.
+<div style="text-align: right">$\Box$</div>
+</p>
+<p>
+This is a super simple toy example, but likewise, we can define several Axioms to prove programs.
+</p>
+<p>
 (Q: How to handle C-style the same time type definition and assignment.)
+</p>
+<h2>Axioms of programs</h2>
+<p>
 </p>
 <h2>References</h2>
 <ol>
