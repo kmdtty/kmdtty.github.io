@@ -22,7 +22,8 @@ For example, we can imagine a C program which adding two integers.
 </p>
 <pre class="code">
 int add(int x, int y) {
-    int z = x + y;
+    int z = 0;
+    z = x + y;
     return z;
 }
 </pre>
@@ -38,11 +39,25 @@ Hoare triple is a (P, S, Q) that is denoted:
 where $P$ is the precondition that is true before $S$ is executed, $S$ is a subset of program list, Q is the postcondition that is true after the $S$ are executed.
 </div>
 <p>For example,</p>
+<p>$\{x + y \Leftrightarrow 4\}$</p>
 <pre class="code">
-{x + y = x + y}
-int z = x + y;
-{z = x +y}
+z = x + y;
 </pre>
+<p>$\{z \Leftrightarrow 4\}$</p>
+<p>
+Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
+</p>
+<p>
+What we want to do with Hoare Toriple is to prove $Q$ from the $P$ and $S$. To do this, we need an axiom of programs.
+</p>
+<div class="definition" text="Axiom of Assignment">
+\begin{equation}
+Q[x|f]\,\,\text{{x = f}}\,\, Q
+\end{equation}
+</div>
+<p>
+(Q: How to handle C-style the same time type definition and assignment.)
+</p>
 <h2>References</h2>
 <ol>
 <li>Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)
