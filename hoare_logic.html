@@ -35,15 +35,15 @@ To verify, express, prove the program, Hoare Logic introduce Hoare triple, axiom
 </p>
 <div class="definition" text="Hoare Triple">
 Hoare triple is a (P, S, Q) that is denoted:
-\[\{P\}\, S\, \{Q\}\]
+\[\big\{P\big\}\, S\, \big\{Q\big\}\]
 where $P$ is the precondition that is true before $S$ is executed, $S$ is a subset of program list, Q is the postcondition that is true after the $S$ are executed.
 </div>
 <p>For example,</p>
-<p>$\{x + y \Leftrightarrow 4\}$</p>
+<p>$\big\{x + y \Leftrightarrow 4\big\}$</p>
 <p>
 z = x + y;
 </p>
-<p>$\{z \Leftrightarrow 4\}$</p>
+<p>$\big\{z \Leftrightarrow 4\big\}$</p>
 <p>
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
 </p>
@@ -52,16 +52,18 @@ What we want to do with Hoare Toriple is to prove $Q$ from the $P$ and $S$. To d
 </p>
 <div class="definition" text="Axiom of Assignment">
 \begin{equation}
-\{Q[\text{f/x}]\}\,\,\text{x = f}\,\, \{Q\}
+\big\{ Q[\text{f/x}] \big\}\,\,
+\text{x = f}\,\,
+\big\{Q\big\}
 \end{equation}
 where <b>x</b> is a variable of a program, <b>f</b> is a expression of a program, and $Q[\text{f/x}]$ denotes a replacement all occurense of <b>f</b> in $Q$ with <b>x</b> .
 </div>
 <p>
 Having Axiom of Assignment, now we can prove the following Hoare Triple.</p>
 <p>\begin{equation*}
-\{x + y \Leftrightarrow 4\} \,
+\big\{x + y \Leftrightarrow 4\big\} \,
 \text{z = x + y;} \,
-\{z \Leftrightarrow 4\}
+\big\{z \Leftrightarrow 4\big\}
 \end{equation*}
 </p>
 <p>
@@ -69,13 +71,40 @@ $z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$
 <span class="qed">$\Box$</span>
 </p>
 <p>
-This is a super simple toy example, but likewise, we can define several Axioms to prove programs.
+This is a super simple toy example, but likewise, we define several Axioms to prove programs.
 </p>
 <p>
 (Q: How to handle C-style the same time type definition and assignment.)
 </p>
 <h2>Axioms of programs</h2>
-<p>
+<div class="definition" text="Axiom of Concate">
+\begin{equation}
+\big\{ \models A \, \wedge \models B \big\} \,
+\text{A; B} \,
+\big\{ \models A \wedge B \big\}
+\end{equation}
+</div>
+<div class="definition" text="Axiom of If1">
+\begin{equation}
+\big\{ \models B \big\}  \, \,
+\text{if (B) \{$s_1$\} else \{ $s_2$ \}  } \, \,
+\big\{ \models s_1 \big\}
+\end{equation}
+</div>
+<div class="definition" text="Axiom of If2">
+\begin{equation}
+\big\{ \models \neg B \big\}  \, \,
+\text{if (B) \{$s_1$\} else \{ $s_2$ \}  } \, \,
+\big\{ \models s_2 \big\}
+\end{equation}
+</div>
+<div class="definition" text="Axiom of Loop">
+\begin{equation}
+\big\{ \models A \big\} \, \,
+\text{while (A) { s }} \, \,
+\big\{ \models \neg A \wedge s \big\}
+\end{equation}
+</div>
 </p>
 <h2>References</h2>
 <ol>
