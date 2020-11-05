@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="kmdtty.css">
-<title>Hoare Logic</title>
+<title>Operational Semantics</title>
 <script src="kmdtty_mathjax_setting.js"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
 <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js"></script>
@@ -14,6 +14,38 @@
 <div class="container">
 <h1>Notes on Operational Semantics</h1>
 <h2>1. Introduction</h2>
+<div class="definition" text="State">
+State $f$ is a partial function from the set of variable $Var$ to the set of values $Num$ such that:
+\begin{equation}
+(X, Y) \subseteq \{(V, N) \mid V \in Var , N \in Num\} \wedge \forall x \in X .\exists y \in Y (f(x) = y ).
+\end{equation}
+</div>
+<p>
+(Need to review: this definition is incorrect)
+</p>
+<h3>Evaluation context of Aritmetic Expressions</h3>
+<p>
+\begin{equation}
+E_A ::= [] \mid E_A + a \mid n + E_A \mid E_A \times a \mid a \times E_a
+\end{equation}
+where $[]$ is the hole that express the location of the target arithmetic expression, $a$ is the meta variable for the arithmetic expressions (Isn't it instruction??). $E_A[a]$ denotes the arithmetic expression that $E_A$ which is replaced with the hole by $a$. 
+</p>
+<h3>Instruction</h3>
+<p>
+\begin{equation}
+    I_A := X \mid n_1 + n_2 \mid n_1 \times n_2 
+\end{equation}
+</p>
+<h3>
+Reduction Rules
+</h3>
+<p>
+\begin{array}{lcllr}
+(E_A[X], \sigma) &\longrightarrow & (E_A[\sigma(X)], \sigma) & & \text{(A-VAR)}\\
+(E_A[n_1 + n_2], \sigma) &amp;\longrightarrow& (E_A[n], \sigma) &\text{(n is the sum of n_1 and n_2)} & \text{(A-PLUS)}\\
+(E_A[n_1 \times n_2], \sigma) &\longrightarrow& (E_A[n], \sigma) &\text{(n is the product of n_1 and n_2)} & \text{(A-MULT)}
+\end{array}
+</p>
 <p>
 Evaluation context.
 Redex.
@@ -22,7 +54,8 @@ Instruction.
 </p>
 <h2>References</h2>
 <ol>
-<li>
+<li>Ariola, Z. M., Maraist, J., Odersky, M., Felleisen, M. &amp; Wadler, P. A call-by-need lambda calculus. in Proceedings of the 22nd ACM SIGPLAN-SIGACT symposium on Principles of programming languages 233-246 (Association for Computing Machinery, 1995).
+<li>Klein, C., McCarthy, J., Jaconette, S. &amp; Findler, R. B. A Semantics for Context-Sensitive Reduction Semantics. in Programming Languages and Systems 369-383 (Springer Berlin Heidelberg, 2011).
 </ol>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Operational Semantics</nav>
