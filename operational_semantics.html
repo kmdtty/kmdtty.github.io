@@ -14,10 +14,16 @@
 <div class="container">
 <h1>Notes on Operational Semantics</h1>
 <h2>1. Introduction</h2>
+<div class="definition" text="Syntax of Arithmetic Expression">
+\begin{equation}
+a ::= n \mid X  \mid  a_0 + a_1 \, \mid a_0 \times a_1
+\end{equation}
+where $a, a_0, a_1$ are the meta variables of arithmetic expression, $n$ is the metavaiable of integers, $X$ is the meta variable of Variables.
+</div>
 <div class="definition" text="State">
 State $\sigma$ is a set which is defined by a partial function $f$ that is from the set of variable $Var$ to the set of values $Num$ such that:
 \begin{array}{ll}
-S \subset \{(v, n) \mid v \in Var , n \in Num\}, \\
+S \subset \{(v_i, n_i) \mid v_i \in Var , n_i \in Num\}, \\
 \sigma = \{(x,y) \in S \mid \forall x.\exists y \neg \exists y'(f(x) = y \wedge f(x) = y' \wedge y' \neq y)\}.
 \end{array}
 </div>
