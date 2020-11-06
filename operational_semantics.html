@@ -29,13 +29,22 @@ S \subset \{(v, n) \mid v \in Var , n \in Num\}, \\
 \begin{equation}
 E_A ::= [] \mid E_A + a \mid n + E_A \mid E_A \times a \mid a \times E_a
 \end{equation}
-where $[]$ is the hole that express the location of the target arithmetic expression, $a$ is the meta variable for the arithmetic expressions (Isn't it instruction??). $E_A[a]$ denotes the arithmetic expression $E_A$ which is replaced with the hole by $a$. 
+where $[]$ is the hole that express the location of the target arithmetic
+expression, $a$ is the meta variable for the arithmetic expressions, (Isn't it instruction??)
+
+$n$ is the meta variable for $Num$. $E_A[a]$ denotes the arithmetic expression which is replaced with the hole by $a$. 
+</p>
+<p>
+(I think we need to define the syntax of $a$ more precisely)
 </p>
 <h3>Instruction</h3>
 <p>
 \begin{equation}
     I_A := X \mid n_1 + n_2 \mid n_1 \times n_2 
 \end{equation}
+</p>
+<p>
+Instruction is an arithmetic expression that is evaluated at the hole of Evaluation context
 </p>
 <h3>
 Reduction Rules
@@ -48,10 +57,7 @@ Reduction Rules
 \end{array}
 </p>
 <p>
-Evaluation context.
-Redex.
-Hole.
-Instruction.
+TBD: Redex
 </p>
 <h2>References</h2>
 <ol>
