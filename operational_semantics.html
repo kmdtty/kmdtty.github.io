@@ -15,20 +15,21 @@
 <h1>Notes on Operational Semantics</h1>
 <h2>1. Introduction</h2>
 <div class="definition" text="State">
-State $f$ is a partial function from the set of variable $Var$ to the set of values $Num$ such that:
-\begin{equation}
-(X, Y) \subseteq \{(V, N) \mid V \in Var , N \in Num\} \wedge \forall x \in X .\exists y \in Y (f(x) = y ).
-\end{equation}
+State $\sigma$ is a set which is defined by a partial function $f$ that is from the set of variable $Var$ to the set of values $Num$ such that:
+\begin{array}{ll}
+S \subset \{(v, n) \mid v \in Var , n \in Num\}, \\
+\sigma = \{(x,y) \in S \mid \forall x.\exists y \neg \exists y'(f(x) = y \wedge f(x) = y' \wedge y' \neq y)\}.
+\end{array}
 </div>
 <p>
-(Need to review: this definition is incorrect)
+(Need to re-review: this definition can be incorrect)
 </p>
 <h3>Evaluation context of Aritmetic Expressions</h3>
 <p>
 \begin{equation}
 E_A ::= [] \mid E_A + a \mid n + E_A \mid E_A \times a \mid a \times E_a
 \end{equation}
-where $[]$ is the hole that express the location of the target arithmetic expression, $a$ is the meta variable for the arithmetic expressions (Isn't it instruction??). $E_A[a]$ denotes the arithmetic expression that $E_A$ which is replaced with the hole by $a$. 
+where $[]$ is the hole that express the location of the target arithmetic expression, $a$ is the meta variable for the arithmetic expressions (Isn't it instruction??). $E_A[a]$ denotes the arithmetic expression $E_A$ which is replaced with the hole by $a$. 
 </p>
 <h3>Instruction</h3>
 <p>
@@ -42,8 +43,8 @@ Reduction Rules
 <p>
 \begin{array}{lcllr}
 (E_A[X], \sigma) &\longrightarrow & (E_A[\sigma(X)], \sigma) & & \text{(A-VAR)}\\
-(E_A[n_1 + n_2], \sigma) &amp;\longrightarrow& (E_A[n], \sigma) &\text{(n is the sum of n_1 and n_2)} & \text{(A-PLUS)}\\
-(E_A[n_1 \times n_2], \sigma) &\longrightarrow& (E_A[n], \sigma) &\text{(n is the product of n_1 and n_2)} & \text{(A-MULT)}
+(E_A[n_1 + n_2], \sigma) &amp;\longrightarrow& (E_A[n], \sigma) &\text{(n is the sum of $n_1$ and $n_2$)} & \text{(A-PLUS)}\\
+(E_A[n_1 \times n_2], \sigma) &\longrightarrow& (E_A[n], \sigma) &\text{(n is the product of $n_1$ and $n_2$)} & \text{(A-MULT)}
 \end{array}
 </p>
 <p>
