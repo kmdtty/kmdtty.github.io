@@ -21,12 +21,13 @@ a ::= n \mid X  \mid  a_0 + a_1 \, \mid a_0 \times a_1
 where $a, a_0, a_1$ are the meta variables of arithmetic expression, $n$ is the metavaiable of integers, $X$ is the meta variable of Variables.
 </div>
 <div class="definition" text="State">
-State $\sigma$ is the set which is defined by the partial function $f$ that is from the set of variable $Var$ to the set of values $Num$ such that:
+State $\sigma$ is the set which is defined by the partial function $f: Var \rightharpoonup Num$ such that:
 \begin{array}{ll}
-S \subset \{(v, n) \mid v \in Var , n \in Num\}, \\
-(\_,y') \in S\\ 
+S \subset Var \times Num, \\
+(\_,y') \in S,\\ 
     \sigma = \{(x,y) \in S \mid \forall x.\exists y \neg \exists y' (f(x) = y \wedge f(x) = y' \wedge y' \neq y) \}.
 \end{array}
+$\sigma[x]$ denotes the value of $f(x)$.
 </div>
 <p>
 (Need to re-review: this definition can be incorrect)
@@ -37,12 +38,9 @@ S \subset \{(v, n) \mid v \in Var , n \in Num\}, \\
 E_A ::= [] \mid E_A + a \mid n + E_A \mid E_A \times a \mid a \times E_a
 \end{equation}
 where $[]$ is the hole that express the location of the target arithmetic
-expression, $a$ is the meta variable for the arithmetic expressions, (Isn't it instruction??)
-
-$n$ is the meta variable for $Num$. $E_A[a]$ denotes the arithmetic expression which is replaced with the hole by $a$. 
+expression, $E_A[a]$ denotes an arithmetic expression which is replaced with the hole by $a$.
 </p>
-<p>
-(I think we need to define the syntax of $a$ more precisely)
+<p>Any arithmetic expressions except $n$ can be expressed by $E_A[a]$. (Proof is needed)
 </p>
 <h3>Instruction</h3>
 <p>
@@ -51,7 +49,7 @@ $n$ is the meta variable for $Num$. $E_A[a]$ denotes the arithmetic expression w
 \end{equation}
 </p>
 <p>
-Instruction is an arithmetic expression that is evaluated at the hole of Evaluation context
+Instruction is an subset of arithmetic expression that is evaluated at the hole of an Evaluation context.
 </p>
 <h3>
 Reduction Rules
