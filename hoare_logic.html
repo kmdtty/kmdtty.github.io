@@ -15,7 +15,7 @@
 <h1>Notes on Hoare Logic</h1>
 <h2>1. Introduction</h2>
 <p>
-Hoare Logic is a logic for progamming languages. It is a logic to verify how programs are calculating. It is a logic to express what those programs are doing. It is a logic to prove programs.
+Hoare Logic is a logic for progamming languages. It is a logic to prove programs.
 </p>
 <p>
 For example, we can imagine a C program which adding two integers.
@@ -31,7 +31,7 @@ int add(int x, int y) {
 Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$.
 </p>
 <p>
-To verify, express, prove the program, Hoare Logic introduce Hoare triple, axioms and the rules.
+To verify, express, prove the program, Hoare Logic introduce Hoare triple.
 </p>
 <div class="definition" text="Hoare Triple">
 Hoare triple is a (P, S, Q) that is denoted:
@@ -48,13 +48,15 @@ z = x + y;
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
 </p>
 <p>
-What we want to do with Hoare Toriple is to prove $Q$ from the $P$ and $S$. To do this, we need an axiom of programs.
+What we want to do with Hoare Toriple is to prove $Q$ from the $P$ and $S$. To do this, we need a <em>system</em> for reasoning from the precondition to the post condition. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>, so let's start to consider its axioms.
 </p>
 <div class="definition" text="Axiom of Assignment">
 \begin{equation}
+\frac{}{
 \big\{ Q[\text{f/x}] \big\}\,\,
 \text{x = f}\,\,
 \big\{Q\big\}
+}
 \end{equation}
 where <b>x</b> is a variable of a program, <b>f</b> is a expression of a program, and $Q[\text{f/x}]$ denotes a replacement all occurense of <b>f</b> in $Q$ with <b>x</b> .
 </div>
@@ -76,36 +78,60 @@ This is a super simple toy example, but likewise, we define several Axioms to pr
 <p>
 (Q: How to handle C-style the same time type definition and assignment.)
 </p>
-<h2>Axioms of programs</h2>
-<div class="definition" text="Axiom of Concate">
+<h2>Rules of hoare logic</h2>
+<div class="definition" text="Concate Rule">
 \begin{equation}
-\big\{ \models A \, \wedge \models B \big\} \,
+\frac{
+\big\{P\big\} A \big\{P_1\big\} \, \, \, \, \,
+\big\{P_1\big\} B \big\{Q\big\}
+}{
+\big\{ P \big\} \,
 \text{A; B} \,
-\big\{ \models A \wedge B \big\}
+\big\{ Q \big\}
+}
 \end{equation}
 </div>
-<div class="definition" text="Axiom of If1">
+<div class="definition" text="If1 Rule">
 \begin{equation}
 \big\{ \models B \big\}  \, \,
 \text{if (B) \{$s_1$\} else \{ $s_2$ \}  } \, \,
 \big\{ \models s_1 \big\}
 \end{equation}
 </div>
-<div class="definition" text="Axiom of If2">
+<div class="definition" text="If2 Rule">
 \begin{equation}
 \big\{ \models \neg B \big\}  \, \,
 \text{if (B) \{$s_1$\} else \{ $s_2$ \}  } \, \,
 \big\{ \models s_2 \big\}
 \end{equation}
 </div>
-<div class="definition" text="Axiom of Loop">
+<div class="definition" text="Consequence Rule">
+\begin{equation}
+\end{equation}
+</div>
+<div class="definition" text="Loop Rule">
 \begin{equation}
 \big\{ \models A \big\} \, \,
 \text{while (A) { s }} \, \,
 \big\{ \models \neg A \wedge s \big\}
 \end{equation}
 </div>
+<p>
+(Note: the above definitions are remaing wrong rules.)
 </p>
+<h2>Weakest Precondition</h2>
+<ul>
+<li>Construct WC()</li>
+</ul>
+
+<h2>Verification Condition</h2>
+<ul>
+<li>Construct VC()</li>
+</ul>
+<h2>Automated Theorem Proving</h2>
+<ul>
+<li>Make examples of automated theorem proving using VC() on a program.
+</ul>
 <h2>References</h2>
 <ol>
 <li>Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)
