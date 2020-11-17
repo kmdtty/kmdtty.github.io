@@ -91,18 +91,17 @@ This is a super simple toy example, but likewise, we define several Axioms to pr
 }
 \end{equation}
 </div>
-<div class="definition" text="If1 Rule">
+<div class="definition" text="If Rule">
 \begin{equation}
-\big\{ \models B \big\}  \, \,
-\text{if (B) \{$s_1$\} else \{ $s_2$ \}  } \, \,
-\big\{ \models s_1 \big\}
-\end{equation}
-</div>
-<div class="definition" text="If2 Rule">
-\begin{equation}
-\big\{ \models \neg B \big\}  \, \,
-\text{if (B) \{$s_1$\} else \{ $s_2$ \}  } \, \,
-\big\{ \models s_2 \big\}
+\frac{
+  \big\{ b \wedge P\big\}  s_1 \big\{ Q\big\} \, \, \, \, \, \, \,
+  \big\{ \neg b \wedge P\big\}  s_2 \big\{ Q\big\}
+  }
+  {
+\big\{ P \big\}  \, \,
+\text{if (b) \{$s_1$\} else \{ $s_2$ \}  } \, \,
+\big\{ Q \big\}
+}
 \end{equation}
 </div>
 <div class="definition" text="Consequence Rule">
