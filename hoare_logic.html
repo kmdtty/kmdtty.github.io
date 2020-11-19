@@ -113,14 +113,36 @@ This is a super simple toy example, but likewise, we define several Axioms to pr
 {\big\{ P \big\} S \big\{ Q\big\}}
 \end{equation}
 </div>
+<!--
 <div class="definition" text="Loop Rule">
 \begin{equation}
 (TBA)
 \end{equation}
 </div>
+-->
+<p>
+Example:
+</p>
 <h2>Weakest Precondition</h2>
+<p>
+Now that we have a system that proves a program.
+</p>
+<p>
+Weakest Precondition is a function from program $S$, postcondition $Q$ to pre condition P where the precondition $P$ verify the post condition $Q$ on the program $S$.
+</p>
+<div class="definition" text="Weekest Precondition (wp)">
+<p>
+Weekest precondition function $wp: S \times Q \times P$ is defined as follows:
+</p>
+\begin{array}{ll}
+&wp(\text{skip, Q}) = \text{Q}\\
+&wp(\text{x=f}, Q) = Q[f/x]\\
+&wp(s_1;s_2, Q) = wp(s_1, wp(s_2, Q)) \\
+&wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q))  \\
+\end{array}
+</div>
 <ul>
-<li>Construct WC()</li>
+<li>Construct WP()</li>
 </ul>
 
 <h2>Verification Condition</h2>
