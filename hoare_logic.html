@@ -128,14 +128,14 @@ Example:
 Now that we have a system that proves a program.
 </p>
 <p>
-Weakest Precondition is a function from program $S$, postcondition $Q$ to pre condition P where the precondition $P$ verify the post condition $Q$ on the program $S$.
+Weakest Precondition is a function from program $S$, postcondition $Q$ to pre condition $P$ where the precondition $P$ verify the post condition $Q$ on the program $S$.
 </p>
 <div class="definition" text="Weekest Precondition (wp)">
 <p>
 Weekest precondition function $wp: S \times Q \times P$ is defined as follows:
 </p>
 \begin{array}{ll}
-&wp(\text{skip, Q}) = \text{Q}\\
+&wp(\text{skip}, Q) = Q\\
 &wp(\text{x=f}, Q) = Q[f/x]\\
 &wp(s_1;s_2, Q) = wp(s_1, wp(s_2, Q)) \\
 &wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q))  \\
