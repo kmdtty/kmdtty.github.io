@@ -141,10 +141,20 @@ Weekest precondition function $wp: S \times Q \times P$ is defined as follows:
 &wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q))  \\
 \end{array}
 </div>
-<ul>
-<li>Construct WP()</li>
-</ul>
-
+<p>
+Then reasoning a post condition $Q$ of program $S$ becomes a task executing:
+<p>
+<div>
+\begin{equation}
+\mathcal{T} \models \{wp(S, Q)\} \, \, S \, \, \{Q\}
+\end{equation}
+</div>
+<p>
+under certain theory $\mathcal{T}$.
+</p>
+<p>
+Example:
+</p>
 <h2>Verification Condition</h2>
 <ul>
 <li>Construct VC()</li>
