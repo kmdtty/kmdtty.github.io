@@ -18,7 +18,7 @@
 Hoare Logic is a logic for progamming languages. It is a logic to prove programs.
 </p>
 <p>
-For example, we can imagine a C program which adding two integers.
+For example, imagine a C program which adding two integers.
 </p>
 <pre class="code">
 int add(int x, int y) {
@@ -31,14 +31,14 @@ int add(int x, int y) {
 Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$.
 </p>
 <p>
-To verify, express, prove the program, Hoare Logic introduce Hoare triple.
+To prove those program, Hoare <a href="#hoare">(Hoare, 1969)</a> introduce Hoare triple.
 </p>
 <div class="definition" text="Hoare Triple">
 Hoare triple is a (P, S, Q) that is denoted:
 \[\big\{P\big\}\, S\, \big\{Q\big\}\]
 where $P$ is the precondition that is true before $S$ is executed, $S$ is a subset of program list, Q is the postcondition that is true after the $S$ are executed.
 </div>
-<p>For example,</p>
+<p>For example, a hoare triple is formed as follows:</p>
 <p>$\big\{x + y \Leftrightarrow 4\big\}$</p>
 <p>
 z = x + y;
@@ -48,7 +48,7 @@ z = x + y;
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
 </p>
 <p>
-What we want to do with Hoare Toriple is to prove $Q$ from the $P$ and $S$. To do this, we need a <em>system</em> for reasoning from the precondition to the post condition. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>, so let's start to consider its axioms.
+To derive $Q$ from the $P$ and $S$, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>, so let's start to consider its axioms.
 </p>
 <div class="definition" text="Axiom of Assignment">
 \begin{equation}
@@ -72,13 +72,6 @@ Having Axiom of Assignment, now we can prove the following Hoare Triple.</p>
 $z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$ by Axiom of Assignment, then we immediately get $ x + y \Leftrightarrow 4$.
 <span class="qed">$\Box$</span>
 </p>
-<p>
-This is a super simple toy example, but likewise, we define several Axioms to prove programs.
-</p>
-<p>
-(Q: How to handle C-style the same time type definition and assignment.)
-</p>
-<h2>Rules of hoare logic</h2>
 <div class="definition" text="Concate Rule">
 \begin{equation}
 \frac{
@@ -125,7 +118,10 @@ Example:
 </p>
 <h2>Weakest Precondition</h2>
 <p>
-Now that we have a system that proves a program.
+Now that we have a formal deductive system to prove a program. However, to prove  prove programs we need to create precondition to satisfy the post condition.
+</p>
+<p>
+To tackle this task, Dijkstra defined <em>weakest precondition</em> in his book &ldquo; A discipline of programming&rdquo; <a href="dijkstra">(Dijkstra 1976)</a> 
 </p>
 <p>
 Weakest Precondition is a function from program $S$, postcondition $Q$ to pre condition $P$ where the precondition $P$ verify the post condition $Q$ on the program $S$.
@@ -165,8 +161,8 @@ Example:
 </ul>
 <h2>References</h2>
 <ol>
-<li>Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)
-<li>Dijkstra, E. W. A discipline of programming. vol. 613924118 (prentice-hall Englewood Cliffs, 1976).
+<li><a name="hoare">Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)</a>
+<li><a name="dijkstra">Dijkstra, E. W. A discipline of programming. vol. 613924118 (prentice-hall Englewood Cliffs, 1976)</a>
 </ol>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Hoare Logic</nav>
