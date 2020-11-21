@@ -15,7 +15,7 @@
 <h1>Notes on Hoare Logic</h1>
 <h2>1. Introduction</h2>
 <p>
-Hoare Logic is a logic for progamming languages. It is a logic to prove programs.
+Hoare Logic is a logic to prove progamming languages.
 </p>
 <p>
 For example, imagine a C program which adding two integers.
@@ -31,7 +31,7 @@ int add(int x, int y) {
 Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$.
 </p>
 <p>
-To prove those program, Hoare <a href="#hoare">(Hoare, 1969)</a> introduce Hoare triple.
+To prove program behaviors, Hoare invented Hoare Triple in <a href="#hoare">(Hoare, 1969)</a>.
 </p>
 <div class="definition" text="Hoare Triple">
 Hoare triple is a (P, S, Q) that is denoted:
@@ -48,8 +48,23 @@ z = x + y;
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
 </p>
 <p>
-To derive $Q$ from the $P$ and $S$, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>, so let's start to consider its axioms.
+To derive $Q$ from the $P$ and $S$, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>, so let's start to consider its axioms with analyzing the programs.
 </p>
+<p>
+When assigning a value f into variable x, <code>x=f</code>, what happened to the precondition and post condition? In Hoare Triple, we think the pre-condition from the post-condition. We are reasoning from backward. So what pre-condition we need for <code>x=f</code> $\{Q\}$? Since in $Q$, the variable <code>x</code> is replaced with <code>f</code>, the precondition $P$ must be $Q[f/x]$.
+</p>
+<p>
+The most simple example is:
+</p>
+<pre class="code">
+{P?}
+<code>x = f</code>
+{x = f}
+</pre>
+<p>
+The $P$ must be $Q[f/x]$ so $f = f$. WIth this analysis we defines the following axiom.
+</p>
+
 <div class="definition" text="Axiom of Assignment">
 \begin{equation}
 \frac{}{
