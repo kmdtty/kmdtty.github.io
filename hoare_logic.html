@@ -87,6 +87,9 @@ Having Axiom of Assignment, now we can prove the following Hoare Triple.</p>
 $z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$ by Axiom of Assignment, then we immediately get $ x + y \Leftrightarrow 4$.
 <span class="qed">$\Box$</span>
 </p>
+<p>
+Likewise, we define these deductive rules:
+</p>
 <div class="definition" text="Concate Rule">
 \begin{equation}
 \frac{
@@ -143,34 +146,37 @@ Weakest Precondition is a function from program $S$, postcondition $Q$ to pre co
 </p>
 <div class="definition" text="Weakest Precondition (wp)">
 <p>
-Weakest precondition function $wp: S \times Q \times P$ is defined as follows:
+Weakest precondition $wp: S \times Q \rightarrow P$ is a function where the $P$ satisfies $\vdash \{P\} S \{Q\}$ that is defined as follows:
 </p>
 \begin{array}{ll}
-&wp(\text{skip}, Q) = Q\\
-&wp(\text{x=f}, Q) = Q[f/x]\\
-&wp(s_1;s_2, Q) = wp(s_1, wp(s_2, Q)) \\
-&wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q))  \\
+&wp(\text{skip}, Q) = Q,\\
+&wp(\text{x=f}, Q) = Q[f/x],\\
+&wp(s_1;s_2, Q) = wp(s_1, wp(s_2, Q)), \\
+&wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q)),  \\
 \end{array}
+where $P$ is weaker than $P_1$ means $P_1 \implies P$.
 </div>
+
+<h2>Verification Condition</h2>
 <p>
-Then reasoning a post condition $Q$ of program $S$ becomes a task executing:
+With the definition of $wp$, reasoning a hoare triple on program $\{P\} S \{Q\}$ becomes a task that is constructing:
 <p>
 <div>
 \begin{equation}
-\mathcal{T} \models \{wp(S, Q)\} \, \, S \, \, \{Q\}
+\mathcal{T} \vdash \{P \implies wp(S, Q)\} \, \, S \, \, \{Q\}
 \end{equation}
 </div>
 <p>
 under certain theory $\mathcal{T}$.
 </p>
+<div class="definition" text="Verification condition (vc)">
+\begin{array}{ll}
+&vc(\{P\} S \{Q\}) = P \implies wp(S, Q)  \\
+\end{array}
+</div>
 <p>
 Example:
-</p>
-<h2>Verification Condition</h2>
-<ul>
-<li>Construct VC()</li>
-</ul>
-<h2>Automated Theorem Proving</h2>
+</p><h2>Automated Theorem Proving</h2>
 <ul>
 <li>Make examples of automated theorem proving using VC() on a program.
 </ul>
