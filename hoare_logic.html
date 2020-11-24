@@ -18,20 +18,13 @@
 Hoare Logic is a logic to prove progamming languages.
 </p>
 <p>
-For example, imagine a C program which adding two integers.
+For example, imagine a C like imerative program which adding two integers <code>x</code>, <code>y</code>.
 </p>
 <pre class="code">
-int add(int x, int y) {
-    int z = 0;
-    z = x + y;
-    return z;
-}
+z = x + y
 </pre>
 <p>
-Then, <code>add(2,3)</code> returns $5$, <code>add(-100, 100)</code> returnds $0$.
-</p>
-<p>
-To prove program behaviors, Hoare invented Hoare Triple in <a href="#hoare">(Hoare, 1969)</a>.
+This program looks obvious, but if we need to prove this program, how to do it? To answer this question, Hoare invented Hoare Triple in <a href="#hoare">(Hoare, 1969)</a>.
 </p>
 <div class="definition" text="Hoare Triple">
 Hoare triple is a (P, S, Q) that is denoted:
@@ -41,14 +34,14 @@ where $P$ is the precondition that is true before $S$ is executed, $S$ is a subs
 <p>For example, a hoare triple is formed as follows:</p>
 <p>$\big\{x + y \Leftrightarrow 4\big\}$</p>
 <p>
-z = x + y;
+z = x + y
 </p>
 <p>$\big\{z \Leftrightarrow 4\big\}$</p>
 <p>
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
 </p>
 <p>
-To derive $Q$ from the $P$ and $S$, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>, so let's start to consider its axioms with analyzing the programs.
+To derive a conclusion from premises, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>. To derive $Q$ from $P$ and $S$, let's consider its axiom and rules with analyzing the programs.
 </p>
 <p>
 When assigning a value f into variable x, <code>x=f</code>, what happened to the precondition and post condition? In Hoare Triple, we think the pre-condition from the post-condition. We are reasoning from backward. So what pre-condition we need for <code>x=f</code> $\{Q\}$? Since in $Q$, the variable <code>x</code> is replaced with <code>f</code>, the precondition $P$ must be $Q[f/x]$.
@@ -88,7 +81,7 @@ $z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$
 <span class="qed">$\Box$</span>
 </p>
 <p>
-Likewise, we define these deductive rules. Before defining 
+Likewise, we define these deductive rules. Before defining the rule, we need the the target programming language specification.
 </p>
 <div class="definition" text="Target Programming Language">
 \begin{array}{lll}
