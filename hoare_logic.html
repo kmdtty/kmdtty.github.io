@@ -88,8 +88,19 @@ $z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$
 <span class="qed">$\Box$</span>
 </p>
 <p>
-Likewise, we define these deductive rules:
+Likewise, we define these deductive rules. Before defining 
 </p>
+<div class="definition" text="Target Programming Language">
+\begin{array}{lll}
+&e :=& x \mid n  \mid e + e \mid e * e\\
+&b :=& \text{true } \mid \text{ false } \mid e \lt e \mid e \gt e \mid e == e \mid \text{not } b \mid b \text{ and } b \mid b \text{ or } b \\
+&c :=& \text{skip } \mid \, c;c \mid x = e \mid \text{ if b then $c$ else $c$} 
+\end{array}
+<p>
+where x is a meta charactor of variables, n is a meta charactor of number.
+</p>
+</div>
+
 <div class="definition" text="Concate Rule">
 \begin{equation}
 \frac{
