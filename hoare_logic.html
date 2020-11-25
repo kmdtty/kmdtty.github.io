@@ -21,24 +21,24 @@ Hoare Logic is a logic to prove progamming languages.
 For example, imagine a C like imerative program which adding two integers <code>x</code>, <code>y</code>.
 </p>
 <pre class="code">
-z = x + y
+z := x + y
 </pre>
 <p>
-This program looks obvious, but if we need to prove this program, how to do it? To answer this question, Hoare invented Hoare Triple in <a href="#hoare">(Hoare, 1969)</a>.
+This program looks obvious, but if we need to prove this program behavior, how to do it? To answer this question, Hoare invented Hoare Triple in <a href="#hoare">(Hoare, 1969)</a>.
 </p>
 <div class="definition" text="Hoare Triple">
 Hoare triple is a (P, S, Q) that is denoted:
-\[\big\{P\big\}\, S\, \big\{Q\big\}\]
+\[\{P\}\, S\, \{Q\}\]
 where $P$ is the precondition that is true before $S$ is executed, $S$ is a subset of program list, Q is the postcondition that is true after the $S$ are executed.
 </div>
 <p>For example, a hoare triple is formed as follows:</p>
-<p>$\big\{x + y \Leftrightarrow 4\big\}$</p>
+<p>$\{x + y = 4\}$</p>
 <p>
-z = x + y
+z := x + y
 </p>
-<p>$\big\{z \Leftrightarrow 4\big\}$</p>
+<p>$\{z = 4\}$</p>
 <p>
-Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
+Here, the precondition $P$ is $x + y = 4$, and a program $S$ is <code>z := x + y</code>, and the postcondition $Q$ is $z = 4$. 
 </p>
 <p>
 To derive a conclusion from premises, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>. To derive $Q$ from $P$ and $S$, let's consider the axiom and rules with analyzing the programs.
@@ -51,7 +51,7 @@ The most simple example is:
 </p>
 <pre class="code">
 {P?}
-<code>x = f</code>
+<code>x := f</code>
 {x = f}
 </pre>
 <p>
@@ -64,9 +64,9 @@ With this analysis we defines the following axiom.
 <div class="definition" text="Axiom of Assignment">
 \begin{equation}
 \frac{}{
-\big\{ Q[\text{f/x}] \big\}\,\,
-\text{x = f}\,\,
-\big\{Q\big\}
+\{ Q[\text{f/x}] \}\,\,
+\text{x := f}\,\,
+\{Q\}
 }
 \end{equation}
 where <b>x</b> is a variable of a program, <b>f</b> is a expression of a program, and $Q[\text{f/x}]$ denotes a replacement all occurense of <b>f</b> in $Q$ with <b>x</b> .
@@ -74,13 +74,13 @@ where <b>x</b> is a variable of a program, <b>f</b> is a expression of a program
 <p>
 Having Axiom of Assignment, now we can prove the following Hoare Triple.</p>
 <p>\begin{equation*}
-\big\{x + y \Leftrightarrow 4\big\} \,
-\text{z = x + y;} \,
-\big\{z \Leftrightarrow 4\big\}
+\{x + y = 4\} \,
+\text{z := x + y;} \,
+\{z = 4\}
 \end{equation*}
 </p>
 <p>
-$z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$ by Axiom of Assignment, then we immediately get $ x + y \Leftrightarrow 4$.
+$z = 4$ can be replaced with $(z = 4)[\text{x+y/z}]$ by Axiom of Assignment, then we immediately get $ x + y = 4$.
 <span class="qed">$\Box$</span>
 </p>
 <p>
@@ -93,7 +93,7 @@ Likewise, we define these deductive rules. Before defining all the remaining rul
 &s :=& \text{skip } \mid \, s;s \mid x = e \mid \text{ if b then $c$ else $c$} 
 \end{array}
 <p>
-where x is a meta charactor of variables, n is a meta charactor of number, s
+where x is a meta charactor of variables, n is a meta charactor of number, s is programs.
 </p>
 </div>
 <p>
@@ -102,30 +102,33 @@ With the above syntax all those are programs:
 <ul>
 <li><code>if x &gt; y then y = x else x = y</code>
 <li><code>skip; skip; skip</code>
-<li><code></code>
+<li><code>x := 1; y := x + 2; z := y + 3</code>
 </ul>
+<p>
+Now we have defined the syntax of target program. Next, we defines all remaining rules.
+</p>
 <div class="definition" text="Concate Rule">
 \begin{equation}
 \frac{
-\big\{P\big\} A \big\{P_1\big\} \, \, \, \, \,
-\big\{P_1\big\} B \big\{Q\big\}
+\{P\} A \{P_1\} \, \, \, \, \,
+\{P_1\} B \{Q\}
 }{
-\big\{ P \big\} \,
+\{ P \} \,
 \text{A; B} \,
-\big\{ Q \big\}
+\{ Q \}
 }
 \end{equation}
 </div>
 <div class="definition" text="If Rule">
 \begin{equation}
 \frac{
-  \big\{ b \wedge P\big\}  s_1 \big\{ Q\big\} \, \, \, \, \, \, \,
-  \big\{ \neg b \wedge P\big\}  s_2 \big\{ Q\big\}
+  \{ b \wedge P\}  s_1 \{ Q\} \, \, \, \, \, \, \,
+  \{ \neg b \wedge P\}  s_2 \{ Q\}
   }
   {
-\big\{ P \big\}  \, \,
+\{ P \}  \, \,
 \text{if (b) \{$s_1$\} else \{ $s_2$ \}  } \, \,
-\big\{ Q \big\}
+\{ Q \}
 }
 \end{equation}
 </div>
@@ -133,9 +136,9 @@ With the above syntax all those are programs:
 \begin{equation}
 \frac{\models P_0 \implies P \, \, \, \, \,
 \models Q_0 \implies Q \, \, \, \, \,
-\big\{ P_0 \big\} S \big\{ Q_0\big\}
+\{ P_0 \} S \{ Q_0\}
 }
-{\big\{ P \big\} S \big\{ Q\big\}}
+{\{ P \} S \{ Q\}}
 \end{equation}
 </div>
 <!--
@@ -148,6 +151,17 @@ With the above syntax all those are programs:
 <p>
 Example:
 </p>
+<p>
+Let a hoare triple be, $\{x = 3\}$ y := x + 2; z := y + 4  $\{z = 3x\}$, a proof with Hoare Logic is the following: </p>
+<ol>
+<li>$\{y +4 = 3x\}$ z := y + 4 $\{z = 3x\}$ by (Axiom of Asignment)</li>
+<li>$\{x + 2 + 4 = 3x\}$ y := x + 2 $\{y + 4 = 3x\}$ by (Axiom of Assignment)</li>
+<li>$\{x + 2 + 4 = 3x\}$ y := x + 2; z := y + 4 $\{z = 3x\}$ by 1, 2 and (Concate Rule)
+<li>$\models x + 2 + 4 = 3x \implies x = 3$ by (Theory of Natural Number)</li>
+<li>$\{x =3\}$ y := x + 2; z := y + 4 $\{ z = 3x \}$ by 3,4 and (Consequence Rule)
+<span class="qed">$\Box$</span>
+</li>
+</ol>
 <h2>Weakest Precondition</h2>
 <p>
 Now that we have a formal deductive system to prove a program. However, to prove  prove programs we need to create precondition to satisfy the post condition.
