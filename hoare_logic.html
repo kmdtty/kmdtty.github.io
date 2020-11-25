@@ -41,7 +41,7 @@ z = x + y
 Here, the precondition $P$ is $x + y \Leftrightarrow 4$, and a program $S$ is <code>z = x + y</code>, and the postcondition $Q$ is $z \Leftrightarrow 4$. 
 </p>
 <p>
-To derive a conclusion from premises, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>. To derive $Q$ from $P$ and $S$, let's consider its axiom and rules with analyzing the programs.
+To derive a conclusion from premises, we need a <em>deductive system</em>. Formal deductive systems are consists of <em>Axioms</em> and <em>Rule</em>. To derive $Q$ from $P$ and $S$, let's consider the axiom and rules with analyzing the programs.
 </p>
 <p>
 When assigning a value f into variable x, <code>x=f</code>, what happened to the precondition and post condition? In Hoare Triple, we think the pre-condition from the post-condition. We are reasoning from backward. So what pre-condition we need for <code>x=f</code> $\{Q\}$? Since in $Q$, the variable <code>x</code> is replaced with <code>f</code>, the precondition $P$ must be $Q[f/x]$.
@@ -55,7 +55,10 @@ The most simple example is:
 {x = f}
 </pre>
 <p>
-The $P$ must be $Q[f/x]$ so $f = f$. WIth this analysis we defines the following axiom.
+The the precondition $P$ must be $Q[f/x]$ so here it is $f = f$. 
+</p>
+<p>
+With this analysis we defines the following axiom.
 </p>
 
 <div class="definition" text="Axiom of Assignment">
@@ -81,19 +84,26 @@ $z \Leftrightarrow 4$ can be replaced with $(z \Leftrightarrow 4)[\text{x+y/z}]$
 <span class="qed">$\Box$</span>
 </p>
 <p>
-Likewise, we define these deductive rules. Before defining the rule, we need the the target programming language specification.
+Likewise, we define these deductive rules. Before defining all the remaining rules, we first need the the target programming language specification.
 </p>
 <div class="definition" text="Target Programming Language">
 \begin{array}{lll}
 &e :=& x \mid n  \mid e + e \mid e * e\\
 &b :=& \text{true } \mid \text{ false } \mid e \lt e \mid e \gt e \mid e == e \mid \text{not } b \mid b \text{ and } b \mid b \text{ or } b \\
-&c :=& \text{skip } \mid \, c;c \mid x = e \mid \text{ if b then $c$ else $c$} 
+&s :=& \text{skip } \mid \, s;s \mid x = e \mid \text{ if b then $c$ else $c$} 
 \end{array}
 <p>
-where x is a meta charactor of variables, n is a meta charactor of number.
+where x is a meta charactor of variables, n is a meta charactor of number, s
 </p>
 </div>
-
+<p>
+With the above syntax all those are programs:
+</p>
+<ul>
+<li><code>if x &gt; y then y = x else x = y</code>
+<li><code>skip; skip; skip</code>
+<li><code></code>
+</ul>
 <div class="definition" text="Concate Rule">
 \begin{equation}
 \frac{
