@@ -222,6 +222,26 @@ Strongest postcondition $sp: S \times P \rightarrow Q$ is a function which satis
 where $P$ is stronger than $P_1$ means $P \implies P_1$.
 </p>
 </div>
+<h2>Symbolic Execution by Strongest Postcondition</h2>
+<p>
+$\exists x_1, \dots, x_n.(X_1 = e_1 \wedge \dots \wedge X_n = e_n ∧ \phi)$
+where $X_1,\dots,X_n$ are variables in a program S, $x_1,\dots,x_n$ are symbolic variables, $e_1,\dots,e_n$ are value of $X_i$, and $\phi$ is a logical formulas. $e_i$ and $\phi$ may contain $x_i$ but must not contain program variables $X_i$.
+<p>
+<p>
+ex.  $\exists i,j (\text{I} = i ∧ \text{J} = j ∧ i < j)$
+</p>
+<p>
+I and J are program variables. $i, j$ are symbolic variables, the above formula is logically equivalent to I $<$ J.
+</p>
+<p>
+Any predicate $P$ can be written with $P = \exists x_1 … x_n(X_1 = x_1 ∧ … ∧ X_n = x_n ∧ P[x_1,...,x_n/X_1,..., X_n])$.</p>
+<p>
+So $sp$ for $\text{X := E}$,
+\begin{array}{ll}
+&sp(X_i := E, \, ∃x_1...x_n(X_1  = e_1 ∧ … ∧ X_n = e_n ∧ \phi)\\
+&= \exists x_1...x_n(X_1=e_1 … ∧ x_i=E[e_1...e_n/X_1...X_n]∧...∧X_n=e_n∧\phi).
+\end{array}
+</p>
 <h2>Automated Theorem Proving</h2>
 <ul>
 <li>Make examples of automated theorem proving using VC() on a program.
