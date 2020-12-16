@@ -174,37 +174,55 @@ Weakest Precondition is a function from program $S$, postcondition $Q$ to pre co
 </p>
 <div class="definition" text="Weakest Precondition (wp)">
 <p>
-Weakest precondition $wp: S \times Q \rightarrow P$ is a function where the $P$ satisfies $\vdash \{P\} S \{Q\}$ that is defined as follows:
+Weakest precondition $wp: S \times Q \rightarrow P$ is a function which satisfies 
+$\vdash \{w(S,Q)\} S \{Q\}$ that is defined as follows:
 </p>
 \begin{array}{ll}
 &wp(\text{skip}, Q) = Q,\\
 &wp(\text{x=f}, Q) = Q[f/x],\\
 &wp(s_1;s_2, Q) = wp(s_1, wp(s_2, Q)), \\
-&wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q)),  \\
+&wp(\text{if b then A else B}, Q) = (b \implies wp(A, Q)) \wedge (\neg b \implies wp(B, Q)),  \\
 \end{array}
 where $P$ is weaker than $P_1$ means $P_1 \implies P$.
 </div>
-
-<h2>Verification Condition</h2>
 <p>
-With the definition of $wp$, reasoning a hoare triple on program $\{P\} S \{Q\}$ becomes a task that is constructing:
-<p>
-<div>
-\begin{equation}
-\mathcal{T} \vdash P \implies wp(S, Q)
-\end{equation}
-</div>
-<p>
-under certain theory $\mathcal{T}$.
+The equation for "if b then A else B",
 </p>
-<div class="definition" text="Verification condition (vc)">
-\begin{array}{ll}
-&vc(\{P\} S \{Q\}) = P \implies wp(S, Q)  \\
-\end{array}
-</div>
 <p>
-Example:
-</p><h2>Automated Theorem Proving</h2>
+\begin{equation}
+wp(\text{if b then A else B}, Q) = (b \implies wp(A, Q)) \wedge (\neg b \implies wp(B, Q))
+\end{equation}
+</p>
+<p>
+is also written as the follwoing format:
+</p>
+<p>
+\begin{equation}
+wp(\text{if b then A else B}, Q) = (b \wedge wp(A, Q)) \vee (\neg b \wedge wp(B, Q)).
+\end{equation}
+</p>
+<p>
+It is because of the following equality :
+\begin{array}{ll}
+(b \wedge P_0) \vee (\neg b \wedge P_1) &\Leftrightarrow \neg (b \wedge P_0) \wedge \neg (\neg b \wedge P_1)\\ 
+&\Leftrightarrow (\neg b \vee P) \wedge (\neg\neg b \vee P_1)\\
+&\Leftrightarrow (b \implies P) \wedge (\neg b \implies P_1).
+\end{array}
+</p>
+<h2>Strongest Postcondition</h2>
+<div class="definition" text="Strongest Postcondition (sp)">
+<p>
+Strongest postcondition $sp: S \times P \rightarrow Q$ is a function which satisfies $\vdash \{P\} S \{sp(S,P)\}$ such that:
+\begin{array}{ll}
+&sp(\text{skip}, P) = P, \\
+&sp(\text{x=f}, P) = \exists v (x=f[v/x] \wedge P[v/x]),\\
+&sp(s_1;s_2, P) = sp(s_2, sp(s_1, P)), \\
+&sp(\text{if b then A else B}, P) = sp(A, P \wedge b) \vee sp(B, P \wedge \neg b), 
+\end{array}
+where $P$ is stronger than $P_1$ means $P \implies P_1$.
+</p>
+</div>
+<h2>Automated Theorem Proving</h2>
 <ul>
 <li>Make examples of automated theorem proving using VC() on a program.
 </ul>
