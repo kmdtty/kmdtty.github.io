@@ -209,7 +209,7 @@ It is because of the following equality :
 &\Leftrightarrow (b \implies P) \wedge (\neg b \implies P_1).
 \end{array}
 </p>
-<h2>Strongest Postcondition</h2>
+<h2>Strongest Postcondition (sp)</h2>
 <div class="definition" text="Strongest Postcondition (sp)">
 <p>
 Strongest postcondition $sp: S \times P \rightarrow Q$ is a function which satisfies $\vdash \{P\} S \{sp(S,P)\}$ such that:
@@ -222,24 +222,49 @@ Strongest postcondition $sp: S \times P \rightarrow Q$ is a function which satis
 where $P$ is stronger than $P_1$ means $P \implies P_1$.
 </p>
 </div>
-<h2>Symbolic Execution by Strongest Postcondition</h2>
+<h2>Symbolic Execution by sp</h2>
 <p>
-$\exists x_1, \dots, x_n.(X_1 = e_1 \wedge \dots \wedge X_n = e_n ∧ \phi)$
-where $X_1,\dots,X_n$ are variables in a program S, $x_1,\dots,x_n$ are symbolic variables, $e_1,\dots,e_n$ are value of $X_i$, and $\phi$ is a logical formulas. $e_i$ and $\phi$ may contain $x_i$ but must not contain program variables $X_i$.
-<p>
-<p>
-ex.  $\exists i,j (\text{I} = i ∧ \text{J} = j ∧ i < j)$
+In program $S$, all the variables of $S$ and the relationship among them are expressed with the following logical form:
 </p>
 <p>
-I and J are program variables. $i, j$ are symbolic variables, the above formula is logically equivalent to I $<$ J.
+\begin{equation}
+\exists x_1, \dots, x_n(X_1 = e_1 \wedge \dots \wedge X_n = e_n ∧ \phi)
+\end{equation}
 </p>
 <p>
-Any predicate $P$ can be written with $P = \exists x_1 … x_n(X_1 = x_1 ∧ … ∧ X_n = x_n ∧ P[x_1,...,x_n/X_1,..., X_n])$.</p>
+where $X_1,\dots,X_n$ are variable names in a program $S$, $x_1,\dots,x_n$ are logical (symbolic) variables, $e_1,\dots,e_n$ are values of $X_i$, and $\phi$ is the logical formulas which constraints the program variables. $e_i$ and $\phi$ may contain $x_i$ but must not contain program variables $X_i$.
 <p>
-So $sp$ for $\text{X := E}$,
+<p>
+<u>Example:</u>
+<p>
+\begin{equation}
+\exists i,j (\text{I} = i ∧ \text{J} = j ∧ i < j)
+\end{equation}
+</p>
+<p>
+I and J are program variables. $i, j$ are logical symbolic variables, thus the above formula is logically equivalent to I $<$ J.
+</p>
+<p>
+Also, in general, any predicate $P$ can be written with
+
+\begin{equation}
+\exists x_1 … x_n(X_1 = x_1 ∧ … ∧ X_n = x_n ∧ P[x_1,...,x_n/X_1,..., X_n])
+\end{equation}
+
+where $P[x_1,...,x_n/X_1,..., X_n]$ is corresponding to $\phi$.
+</p>
+<p>
+Then, with the above setting,  $sp$ for $\text{X := E}$ will be,
 \begin{array}{ll}
-&sp(X_i := E, \, ∃x_1...x_n(X_1  = e_1 ∧ … ∧ X_n = e_n ∧ \phi)\\
-&= \exists x_1...x_n(X_1=e_1 … ∧ x_i=E[e_1...e_n/X_1...X_n]∧...∧X_n=e_n∧\phi).
+&sp(X_i := E, \, \exists x_1...x_n(X_1  = e_1 ∧ … ∧ X_n = e_n ∧ \phi)\\
+&= \exists x_1...x_n(X_1=e_1 … ∧ X_i=E[e_1...e_n/X_1...X_n]∧...∧X_n=e_n∧\phi).
+\end{array}
+</p>
+<p>
+If $X_1,\dots,X_n, x_1,\dots,x_n$ are clear from the context, we simply writes:
+\begin{array}{ll}
+&sp(X_i = E, \, \exists \bar{x} (\bar{X} = \bar{e} \wedge \phi)\\
+&= \exists \bar{x}(X_1 = e_1 \wedge \dots \wedge X_i = E[\bar{x}/\bar{e}] \wedge \dots \wedge X_n = e_n \wedge \phi
 \end{array}
 </p>
 <h2>Automated Theorem Proving</h2>
@@ -250,6 +275,7 @@ So $sp$ for $\text{X := E}$,
 <ol>
 <li><a name="hoare">Hoare, C. A. R. An axiomatic basis for computer programming. Commun. ACM 12, 576–580 (1969)</a>
 <li><a name="dijkstra">Dijkstra, E. W. A discipline of programming. vol. 613924118 (prentice-hall Englewood Cliffs, 1976)</a>
+<li><a name="gordon_collavizza">Gordon, M. & Collavizza, H. Forward with Hoare. in Reflections on the Work of C.A.R. Hoare (eds. Roscoe, A. W., Jones, C. B. & Wood, K. R.) 101–121 (Springer London, 2010).</a>
 </ol>
 <hr>
 <nav class="mb-3"><a href="index.html">Home</a> &gt; Hoare Logic</nav>
