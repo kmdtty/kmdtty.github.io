@@ -274,7 +274,7 @@ Why we can write is because:
 \begin{array}{ll}
 & sp(X_i := E, \exists \bar{x} (\bar{X} = \bar{e} \wedge \phi))\\
 & = \exists v (X_i = E[v/X_i] \wedge \exists \bar{x} (\bar{X} = \bar{e} \wedge \phi)[v/X_i]) \\
-& = \exists v(X_i = E[v/X_i] \wedge \exists \bar{x}(X_i = e_i \wedge \dots \wedge v = e_i \wedge \dots \wedge X_n = e_n \wedge \phi))\\
+& = \exists v(X_i = E[v/X_i] \wedge \exists \bar{x}(X_1 = e_1 \wedge \dots \wedge v = e_i \wedge \dots \wedge X_n = e_n \wedge \phi))\\
 & = \exists v,\bar{x} (X_i = E[v/X_i] \wedge X_1 = e_1 \wedge \dots \wedge \dots v = e_i \wedge \dots X_n = e_n \wedge \phi)\\
 & = \exists \bar{x} (X_i =  E[e_i/X_i] \wedge X_1 = e_1 \wedge \dots \wedge \exists v(v=e_i) \wedge \dots X_n = e_n \wedge \phi)\\
 & = \exists \bar{x} (X_i =  E[e_i/X_i] \wedge X_1 = e_1 \wedge \dots \wedge \top \wedge \dots X_n = e_n \wedge \phi)\\
